@@ -1,0 +1,558 @@
+<title>E.D. IT Solutions</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root{
+    --bg:#eff1ee;
+    --surface:#ffffff;
+    --surface-2:#e6e9e5;
+    --border:#d7dbd5;
+    --ink:#1b2321;
+    --ink-muted:#57625c;
+    --accent:#b5651d;
+    --accent-strong:#8f4e15;
+    --accent-soft:#f0dcc8;
+    --line:#b7c4bb;
+    --font-sans:'IBM Plex Sans','Segoe UI',system-ui,sans-serif;
+    --font-mono:'IBM Plex Mono','SFMono-Regular',Consolas,monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#101815;
+      --surface:#1a2621;
+      --surface-2:#21302a;
+      --border:#2e3f38;
+      --ink:#e7ece9;
+      --ink-muted:#9fb0a9;
+      --accent:#e08a3e;
+      --accent-strong:#f2a55c;
+      --accent-soft:#3a2a1c;
+      --line:#3a4c44;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#101815;
+    --surface:#1a2621;
+    --surface-2:#21302a;
+    --border:#2e3f38;
+    --ink:#e7ece9;
+    --ink-muted:#9fb0a9;
+    --accent:#e08a3e;
+    --accent-strong:#f2a55c;
+    --accent-soft:#3a2a1c;
+    --line:#3a4c44;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--font-sans);
+    font-size:16px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:var(--font-sans);
+    font-weight:700;
+    line-height:1.12;
+    margin:0;
+    text-wrap:balance;
+    letter-spacing:-0.01em;
+  }
+  p{margin:0;}
+  a{color:inherit;}
+  .wrap{
+    max-width:1040px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:12.5px;
+    font-weight:500;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--accent-strong);
+  }
+  .rule{
+    height:1px;
+    background:var(--border);
+    border:none;
+    margin:0;
+  }
+
+  /* header */
+  header{
+    padding:22px 0;
+    border-bottom:1px solid var(--border);
+  }
+  .headbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+  .mark{
+    font-family:var(--font-mono);
+    font-weight:600;
+    font-size:15px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+  }
+  .mark span{color:var(--accent);}
+  nav{
+    display:flex;
+    gap:24px;
+    font-size:14.5px;
+  }
+  nav a{
+    text-decoration:none;
+    color:var(--ink-muted);
+    border-bottom:1px solid transparent;
+    padding-bottom:2px;
+    transition:color .15s ease, border-color .15s ease;
+  }
+  nav a:hover, nav a:focus-visible{
+    color:var(--ink);
+    border-color:var(--accent);
+  }
+
+  /* hero */
+  .hero{
+    padding:72px 0 64px;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:34px 34px;
+    background-position:center top;
+    -webkit-mask-image:linear-gradient(to bottom, black, black 70%, transparent 100%);
+            mask-image:linear-gradient(to bottom, black, black 70%, transparent 100%);
+    opacity:1;
+  }
+  .hero-inner{
+    background-image:none;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.3fr 1fr;
+    gap:48px;
+    align-items:start;
+  }
+  h1{
+    font-size:clamp(32px,4.4vw,46px);
+    margin-top:14px;
+  }
+  .lede{
+    margin-top:18px;
+    max-width:46ch;
+    color:var(--ink-muted);
+    font-size:17px;
+  }
+  .cta-row{
+    margin-top:30px;
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+    align-items:center;
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:var(--font-sans);
+    font-weight:600;
+    font-size:14.5px;
+    padding:12px 20px;
+    border-radius:3px;
+    text-decoration:none;
+    border:1px solid transparent;
+    cursor:pointer;
+  }
+  .btn-primary{
+    background:var(--accent);
+    color:#fff9f2;
+  }
+  .btn-primary:hover{background:var(--accent-strong);}
+  .btn-ghost{
+    color:var(--ink);
+    border-color:var(--border);
+    background:var(--surface);
+  }
+  .btn-ghost:hover{border-color:var(--accent);}
+
+  /* title block card, reused in hero + footer */
+  .titleblock{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:4px;
+    overflow:hidden;
+  }
+  .tb-row{
+    display:grid;
+    grid-template-columns:118px 1fr;
+    gap:12px;
+    padding:13px 16px;
+    border-bottom:1px solid var(--border);
+  }
+  .tb-row:last-child{border-bottom:none;}
+  .tb-label{
+    font-family:var(--font-mono);
+    font-size:11px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--ink-muted);
+    padding-top:2px;
+  }
+  .tb-value{font-size:14.5px; font-weight:500;}
+  .tb-value.accent{color:var(--accent-strong);}
+
+  section{padding:64px 0;}
+  .section-head{margin-bottom:34px; max-width:60ch;}
+  .section-head h2{font-size:clamp(24px,3vw,30px); margin-top:8px;}
+
+  /* about */
+  .about-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:48px;
+    align-items:start;
+  }
+  .about-grid p + p{margin-top:14px;}
+  .about-grid p{color:var(--ink-muted); font-size:15.5px;}
+  .stat-list{display:flex; flex-direction:column; gap:0;}
+  .stat{
+    display:flex;
+    justify-content:space-between;
+    gap:16px;
+    padding:14px 0;
+    border-bottom:1px solid var(--border);
+    font-size:14.5px;
+  }
+  .stat:first-child{padding-top:0;}
+  .stat-k{color:var(--ink-muted);}
+  .stat-v{font-family:var(--font-mono); font-weight:500; text-align:right;}
+
+  /* BOM / skills table */
+  table{width:100%; border-collapse:collapse; font-size:14.5px;}
+  thead th{
+    text-align:left;
+    font-family:var(--font-mono);
+    font-size:11px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--ink-muted);
+    font-weight:500;
+    padding:0 14px 10px;
+    border-bottom:1px solid var(--ink-muted);
+  }
+  tbody td{
+    padding:14px 14px;
+    border-bottom:1px solid var(--border);
+    vertical-align:top;
+  }
+  tbody tr:nth-child(odd){background:var(--surface-2);}
+  .ref{
+    font-family:var(--font-mono);
+    color:var(--accent-strong);
+    font-weight:600;
+    white-space:nowrap;
+    width:64px;
+  }
+  .skill-name{font-weight:600;}
+  .skill-spec{color:var(--ink-muted);}
+  .table-wrap{overflow-x:auto; border:1px solid var(--border); border-radius:4px;}
+  .table-wrap table{min-width:520px;}
+
+  /* projects */
+  .cards{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+  }
+  .card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:4px;
+    padding:24px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    min-height:100%;
+  }
+  .card h3{font-size:18px;}
+  .card p{color:var(--ink-muted); font-size:14.5px; flex-grow:1;}
+  .tags{display:flex; flex-wrap:wrap; gap:6px;}
+  .tag{
+    font-family:var(--font-mono);
+    font-size:11.5px;
+    padding:4px 9px;
+    border-radius:999px;
+    background:var(--accent-soft);
+    color:var(--accent-strong);
+    white-space:nowrap;
+  }
+  .card-foot{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    padding-top:4px;
+  }
+  .card-link{
+    font-size:13.5px;
+    font-weight:600;
+    color:var(--accent-strong);
+    text-decoration:none;
+  }
+  .card-link:hover{text-decoration:underline;}
+  .card-note{
+    font-family:var(--font-mono);
+    font-size:12px;
+    color:var(--ink-muted);
+  }
+  .card.dashed{border-style:dashed;}
+
+  /* contact */
+  .contact-box{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:28px;
+    flex-wrap:wrap;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:6px;
+    padding:36px;
+  }
+  .contact-box h2{font-size:clamp(22px,3vw,28px);}
+  .contact-box p{color:var(--ink-muted); margin-top:10px; max-width:44ch;}
+
+  footer{
+    padding:28px 0 40px;
+  }
+  .footer-tb{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    border:1px solid var(--border);
+    border-radius:4px;
+    overflow:hidden;
+    font-family:var(--font-mono);
+    font-size:11.5px;
+  }
+  .footer-tb div{
+    padding:12px 14px;
+    border-right:1px solid var(--border);
+  }
+  .footer-tb div:last-child{border-right:none;}
+  .footer-tb .k{
+    display:block;
+    color:var(--ink-muted);
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    font-size:10px;
+    margin-bottom:4px;
+  }
+  .footer-note{
+    margin-top:16px;
+    font-size:12.5px;
+    color:var(--ink-muted);
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+
+  @media (max-width:760px){
+    .hero-grid{grid-template-columns:1fr;}
+    .about-grid{grid-template-columns:1fr;}
+    .cards{grid-template-columns:1fr;}
+    .footer-tb{grid-template-columns:1fr 1fr;}
+    nav{gap:16px; font-size:13.5px;}
+    section{padding:48px 0;}
+  }
+</style>
+
+<header>
+  <div class="wrap headbar">
+    <div class="mark">E.D. IT<span>_</span></div>
+    <nav>
+      <a href="#over">Over mij</a>
+      <a href="#skills">Skills</a>
+      <a href="#projecten">Projecten</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">E.D. IT Solutions · Software · Remote</div>
+        <h1>Van schema tot werkende oplossing.</h1>
+        <p class="lede">Ik bouw software — dashboards, bots, data-integraties — voor wie iets betrouwbaars nodig heeft en niet wil wachten. Volledig op afstand, dus snel opgestart.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="mailto:enriquedhaeseleer@gmail.com">Stuur een mail</a>
+          <a class="btn btn-ghost" href="#projecten">Bekijk projecten</a>
+        </div>
+      </div>
+      <div class="titleblock" aria-label="Kerninfo">
+        <div class="tb-row">
+          <span class="tb-label">Achtergrond</span>
+          <span class="tb-value">Elektronica-ICT</span>
+        </div>
+        <div class="tb-row">
+          <span class="tb-label">Ervaring</span>
+          <span class="tb-value">IT-support @ BEEGO</span>
+        </div>
+        <div class="tb-row">
+          <span class="tb-label">Werkwijze</span>
+          <span class="tb-value">100% op afstand</span>
+        </div>
+        <div class="tb-row">
+          <span class="tb-label">Status</span>
+          <span class="tb-value accent">Open voor freelance</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section id="over">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Over mij</div>
+      <h2>Achtergrond in elektronica, focus op software</h2>
+    </div>
+    <div class="about-grid">
+      <div>
+        <p>Ik ben Enrique, de persoon achter E.D. IT Solutions. Mijn achtergrond ligt in elektronica-ICT, en ik werk daarnaast als IT-supportmedewerker bij BEEGO. In mijn vrije tijd bouw ik eigen software — meestal dashboards en tools die live data verwerken.</p>
+        <p>Als freelancer hou ik het bewust bij wat ik volledig van thuis uit kan opleveren: software, API's en automatisatie. Geen ter-plaatse-werk, geen hardware — gewoon een duidelijk afgebakend project en een werkende oplossing op het einde.</p>
+      </div>
+      <div class="stat-list">
+        <div class="stat"><span class="stat-k">Achtergrond</span><span class="stat-v">Elektronica-ICT</span></div>
+        <div class="stat"><span class="stat-k">Nevenwerk</span><span class="stat-v">IT-support, BEEGO</span></div>
+        <div class="stat"><span class="stat-k">Werkwijze</span><span class="stat-v">100% op afstand</span></div>
+        <div class="stat"><span class="stat-k">Locatie</span><span class="stat-v">Gent-regio (remote)</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Stuklijst</div>
+      <h2>Wat ik meebreng</h2>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Ref.</th><th>Onderdeel</th><th>Tools &amp; specificatie</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="ref">U1</td>
+            <td class="skill-name">Web &amp; software development</td>
+            <td class="skill-spec">Next.js, React, JavaScript/TypeScript</td>
+          </tr>
+          <tr>
+            <td class="ref">U2</td>
+            <td class="skill-name">API- &amp; data-integraties</td>
+            <td class="skill-spec">REST-API's, real-time datastromen</td>
+          </tr>
+          <tr>
+            <td class="ref">U3</td>
+            <td class="skill-name">Automatisatie &amp; bots</td>
+            <td class="skill-spec">Scripts, workflow-automatisatie, Discord-integraties</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section id="projecten">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Projecten</div>
+      <h2>Waar ik aan gewerkt heb</h2>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <h3>bitunix-journal</h3>
+        <p>Een dashboard dat rechtstreeks verbindt met de Bitunix-API om trades te loggen, analyseren en visualiseren — gebouwd voor dagelijks gebruik, niet als demo.</p>
+        <div class="tags">
+          <span class="tag">Next.js</span>
+          <span class="tag">React</span>
+          <span class="tag">REST API</span>
+        </div>
+        <div class="card-foot">
+          <span class="card-note">Privéproject — demo op aanvraag</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3>btcstats-alpha</h3>
+        <p>Een tool die jaren aan BTC-koersdata herleidt tot seizoenspatronen, als extra context bij het timen van posities.</p>
+        <div class="tags">
+          <span class="tag">JavaScript</span>
+          <span class="tag">Binance API</span>
+        </div>
+        <div class="card-foot">
+          <a class="card-link" href="https://btcstats-alpha.vercel.app" target="_blank" rel="noopener">Bekijk live →</a>
+        </div>
+      </div>
+      <div class="card dashed">
+        <h3>Op maat</h3>
+        <p>Werk je met een specifieke workflow, dataset of community en heb je daar een tool, bot of automatisatie voor nodig? Ik bouw op maat, in overleg.</p>
+        <div class="tags">
+          <span class="tag">Automatisatie</span>
+          <span class="tag">Dashboards</span>
+        </div>
+        <div class="card-foot">
+          <a class="card-link" href="#contact">Bespreek je project →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-box">
+      <div>
+        <div class="eyebrow">Aan de slag</div>
+        <h2>Heb je iets te bouwen of op te lossen?</h2>
+        <p>Ik werk op afstand, dus we kunnen meteen van start — ongeacht waar je bent.</p>
+      </div>
+      <a class="btn btn-primary" href="mailto:enriquedhaeseleer@gmail.com">enriquedhaeseleer@gmail.com</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-tb">
+      <div><span class="k">Titel</span>E.D. IT Solutions</div>
+      <div><span class="k">Blad</span>1/1</div>
+      <div><span class="k">Rev.</span>2026.09</div>
+      <div><span class="k">Status</span>Open voor freelance</div>
+    </div>
+    <div class="footer-note">
+      <span>Gebouwd door Enrique</span>
+      <span>Gent-regio · op afstand beschikbaar</span>
+    </div>
+  </div>
+</footer>
