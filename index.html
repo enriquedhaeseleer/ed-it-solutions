@@ -16,33 +16,6 @@
     --font-sans:'IBM Plex Sans','Segoe UI',system-ui,sans-serif;
     --font-mono:'IBM Plex Mono','SFMono-Regular',Consolas,monospace;
   }
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){
-      --bg:#101815;
-      --surface:#1a2621;
-      --surface-2:#21302a;
-      --border:#2e3f38;
-      --ink:#e7ece9;
-      --ink-muted:#9fb0a9;
-      --accent:#e08a3e;
-      --accent-strong:#f2a55c;
-      --accent-soft:#3a2a1c;
-      --line:#3a4c44;
-    }
-  }
-  :root[data-theme="dark"]{
-    --bg:#101815;
-    --surface:#1a2621;
-    --surface-2:#21302a;
-    --border:#2e3f38;
-    --ink:#e7ece9;
-    --ink-muted:#9fb0a9;
-    --accent:#e08a3e;
-    --accent-strong:#f2a55c;
-    --accent-soft:#3a2a1c;
-    --line:#3a4c44;
-  }
-
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
   body{
@@ -143,7 +116,7 @@
     align-items:start;
   }
   h1{
-    font-size:clamp(32px,4.4vw,46px);
+    font-size:clamp(34px,5.2vw,54px);
     margin-top:14px;
   }
   .lede{
@@ -316,6 +289,58 @@
   }
   .card.dashed{border-style:dashed;}
 
+  /* aanbod / tarieven */
+  .price{
+    font-family:var(--font-mono);
+    font-size:23px;
+    font-weight:600;
+    color:var(--ink);
+    letter-spacing:-0.02em;
+  }
+  .price small{
+    font-size:12.5px;
+    font-weight:500;
+    color:var(--ink-muted);
+    letter-spacing:0;
+  }
+  .incl{
+    list-style:none;
+    margin:0;
+    padding:0;
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+    font-size:13.5px;
+    color:var(--ink-muted);
+    flex-grow:1;
+  }
+  .incl li{
+    display:grid;
+    grid-template-columns:16px 1fr;
+    gap:8px;
+    align-items:start;
+  }
+  .incl li::before{
+    content:"—";
+    color:var(--accent-strong);
+    font-family:var(--font-mono);
+  }
+  .card.featured{border-color:var(--accent);}
+  .card-tagline{
+    font-family:var(--font-mono);
+    font-size:11px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--accent-strong);
+  }
+  .price s{
+    color:var(--ink-muted);
+    font-size:17px;
+    font-weight:500;
+    margin-right:8px;
+    text-decoration-thickness:1.5px;
+  }
+
   /* contact */
   .contact-box{
     display:flex;
@@ -374,6 +399,35 @@
     nav{gap:16px; font-size:13.5px;}
     section{padding:48px 0;}
   }
+
+  /* hover lift on cards + titleblock */
+  .card, .titleblock{
+    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+  .card:hover{
+    transform:translateY(-4px);
+    border-color:var(--accent);
+    box-shadow:0 0 0 1px var(--accent), 0 14px 28px -16px rgba(0,0,0,.4);
+  }
+
+  /* hero monogram flourish */
+  .hero{position:relative; overflow:hidden;}
+  .hero-mark{
+    position:absolute;
+    right:-0.06em;
+    top:-0.14em;
+    font-family:var(--font-mono);
+    font-weight:600;
+    font-size:min(46vw, 460px);
+    line-height:1;
+    letter-spacing:-0.06em;
+    color:var(--ink);
+    opacity:.05;
+    pointer-events:none;
+    user-select:none;
+    z-index:0;
+  }
+  .hero .wrap{position:relative; z-index:1;}
 </style>
 
 <header>
@@ -382,6 +436,7 @@
     <nav>
       <a href="#over">Over mij</a>
       <a href="#skills">Skills</a>
+      <a href="#aanbod">Aanbod</a>
       <a href="#projecten">Projecten</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -389,12 +444,13 @@
 </header>
 
 <section class="hero">
+  <div class="hero-mark" aria-hidden="true">ED</div>
   <div class="wrap">
     <div class="hero-grid">
       <div>
         <div class="eyebrow">E.D. IT Solutions · Software · Remote</div>
         <h1>Van schema tot werkende oplossing.</h1>
-        <p class="lede">Ik bouw software — dashboards, bots, data-integraties — voor wie iets betrouwbaars nodig heeft en niet wil wachten. Volledig op afstand, dus snel opgestart.</p>
+        <p class="lede">Ik bouw websites én de software erachter — dashboards, interne tools, automatisaties. Voor wie iets betrouwbaars nodig heeft en niet wil wachten. Volledig op afstand, dus we kunnen morgen al beginnen.</p>
         <div class="cta-row">
           <a class="btn btn-primary" href="mailto:enriquedhaeseleer@gmail.com">Stuur een mail</a>
           <a class="btn btn-ghost" href="#projecten">Bekijk projecten</a>
@@ -433,13 +489,13 @@
     <div class="about-grid">
       <div>
         <p>Ik ben Enrique, de persoon achter E.D. IT Solutions. Mijn achtergrond ligt in elektronica-ICT, en ik werk daarnaast als IT-supportmedewerker bij BEEGO. In mijn vrije tijd bouw ik eigen software — meestal dashboards en tools die live data verwerken.</p>
-        <p>Als freelancer hou ik het bewust bij wat ik volledig van thuis uit kan opleveren: software, API's en automatisatie. Geen ter-plaatse-werk, geen hardware — gewoon een duidelijk afgebakend project en een werkende oplossing op het einde.</p>
+        <p>Als freelancer hou ik het bewust bij wat ik volledig van thuis uit kan opleveren: websites, software op maat en automatisatie. Geen ter-plaatse-werk, geen hardware — gewoon een duidelijk afgebakend project en een werkende oplossing op het einde.</p>
       </div>
       <div class="stat-list">
         <div class="stat"><span class="stat-k">Achtergrond</span><span class="stat-v">Elektronica-ICT</span></div>
         <div class="stat"><span class="stat-k">Nevenwerk</span><span class="stat-v">IT-support, BEEGO</span></div>
         <div class="stat"><span class="stat-k">Werkwijze</span><span class="stat-v">100% op afstand</span></div>
-        <div class="stat"><span class="stat-k">Locatie</span><span class="stat-v">Gent-regio (remote)</span></div>
+        <div class="stat"><span class="stat-k">Bereik</span><span class="stat-v">Internationaal</span></div>
       </div>
     </div>
   </div>
@@ -461,21 +517,74 @@
         <tbody>
           <tr>
             <td class="ref">U1</td>
-            <td class="skill-name">Web &amp; software development</td>
-            <td class="skill-spec">Next.js, React, JavaScript/TypeScript</td>
+            <td class="skill-name">Websites &amp; landingpagina's</td>
+            <td class="skill-spec">Handgeschreven code, responsive, SEO-basis</td>
           </tr>
           <tr>
             <td class="ref">U2</td>
+            <td class="skill-name">Software op maat</td>
+            <td class="skill-spec">Dashboards, interne tools, Next.js/React</td>
+          </tr>
+          <tr>
+            <td class="ref">U3</td>
             <td class="skill-name">API- &amp; data-integraties</td>
             <td class="skill-spec">REST-API's, real-time datastromen</td>
           </tr>
           <tr>
-            <td class="ref">U3</td>
+            <td class="ref">U4</td>
             <td class="skill-name">Automatisatie &amp; bots</td>
             <td class="skill-spec">Scripts, workflow-automatisatie, Discord-integraties</td>
           </tr>
         </tbody>
       </table>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section id="aanbod">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Aanbod</div>
+      <h2>Wat het kost</h2>
+      <p class="lede" style="margin-top:14px; font-size:15.5px;">Alles handgeschreven in echte code — geen WordPress of paginabouwers. Dat betekent een site die snel laadt, niet stukgaat door plugin-updates, en waar Google beter mee overweg kan. Je domeinnaam koop je op je eigen naam (ongeveer €15 per jaar), die blijft dus altijd van jou.</p>
+      <p style="margin-top:14px;"><a class="card-link" href="stijlen.html">Bekijk de vier stijlen om uit te kiezen →</a></p>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="card-tagline">Onepager</div>
+        <h3>Eén sterke pagina</h3>
+        <span class="price"><s>€350</s>€250</span>
+        <ul class="incl">
+          <li>Ontwerp op maat van je zaak</li>
+          <li>Werkt vlot op gsm en desktop</li>
+          <li>SEO-basis ingesteld voor Google</li>
+          <li>Twee rondes aanpassingen inbegrepen</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-tagline">Bedrijfssite</div>
+        <h3>Meerdere pagina's</h3>
+        <span class="price"><s>€750</s>€450</span>
+        <ul class="incl">
+          <li>Aparte pagina's per dienst</li>
+          <li>Contactformulier</li>
+          <li>SEO per pagina ingesteld</li>
+          <li>Twee rondes aanpassingen inbegrepen</li>
+        </ul>
+      </div>
+      <div class="card featured">
+        <div class="card-tagline">Optioneel</div>
+        <h3>Onderhoud &amp; bijstand</h3>
+        <span class="price">€50 <small>/ maand</small></span>
+        <ul class="incl">
+          <li>Hosting volledig geregeld</li>
+          <li>Eén aanpassing per maand inbegrepen</li>
+          <li>Back-ups en technische opvolging</li>
+          <li>Antwoord binnen twee werkdagen</li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
@@ -490,15 +599,26 @@
     </div>
     <div class="cards">
       <div class="card">
-        <h3>bitunix-journal</h3>
-        <p>Een dashboard dat rechtstreeks verbindt met de Bitunix-API om trades te loggen, analyseren en visualiseren — gebouwd voor dagelijks gebruik, niet als demo.</p>
+        <h3>Brouwerij Wildebrasse</h3>
+        <p>Volledige site voor een ambachtelijke brouwerij: een eigen pagina per bier, verkooppunten, bestelmogelijkheid en contact — opgebouwd rond hun eigen productfoto's.</p>
         <div class="tags">
-          <span class="tag">Next.js</span>
-          <span class="tag">React</span>
-          <span class="tag">REST API</span>
+          <span class="tag">Meerdere pagina's</span>
+          <span class="tag">Catalogus</span>
+          <span class="tag">Bestelfunctie</span>
         </div>
         <div class="card-foot">
-          <span class="card-note">Privéproject — demo op aanvraag</span>
+          <a class="card-link" href="https://a-alpha-five.vercel.app/" target="_blank" rel="noopener">Bekijk live →</a>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Voorbeeld: Lustra Detailing</h3>
+        <p>Een volledig uitgewerkte voorbeeldsite voor een fictieve zaak — om te tonen hoe een project er visueel en technisch kan uitzien, los van de schema-stijl hierboven.</p>
+        <div class="tags">
+          <span class="tag">Landingpagina</span>
+          <span class="tag">Design</span>
+        </div>
+        <div class="card-foot">
+          <a class="card-link" href="https://claude.ai/code/artifact/d8301671-1b6a-415c-82bb-72be2ca9b9b4" target="_blank" rel="noopener">Bekijk voorbeeld →</a>
         </div>
       </div>
       <div class="card">
@@ -510,17 +630,6 @@
         </div>
         <div class="card-foot">
           <a class="card-link" href="https://btcstats-alpha.vercel.app" target="_blank" rel="noopener">Bekijk live →</a>
-        </div>
-      </div>
-      <div class="card dashed">
-        <h3>Op maat</h3>
-        <p>Werk je met een specifieke workflow, dataset of community en heb je daar een tool, bot of automatisatie voor nodig? Ik bouw op maat, in overleg.</p>
-        <div class="tags">
-          <span class="tag">Automatisatie</span>
-          <span class="tag">Dashboards</span>
-        </div>
-        <div class="card-foot">
-          <a class="card-link" href="#contact">Bespreek je project →</a>
         </div>
       </div>
     </div>
@@ -552,7 +661,7 @@
     </div>
     <div class="footer-note">
       <span>Gebouwd door Enrique</span>
-      <span>Gent-regio · op afstand beschikbaar</span>
+      <span>Remote · beschikbaar wereldwijd</span>
     </div>
   </div>
 </footer>
