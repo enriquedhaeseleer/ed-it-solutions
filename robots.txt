@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ed-it-solutions.be/sitemap.xml
